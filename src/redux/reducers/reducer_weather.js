@@ -8,7 +8,7 @@ export default function ReducerWeather(state = [], action) {
       return action.payload;
     case actionTypes.FETCH_WEATHER_SUCCESS:
       //don't manipulate state
-      return [action.payload, ...state];//instead we return new copy of state
+      return [action.payload.data, ...state];//instead we return new copy of state
     case actionTypes.FETCH_WEATHER_ERROR:
       return action.payload;
   }
