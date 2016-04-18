@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import SearchBar from '../../containers/search_bar';
+import WeatherList from '../../containers/weather_list';
 import DuckImage from './Duck.jpg';
 import classes from './HomeView.scss';
 
@@ -25,7 +26,8 @@ export class HomeView extends React.Component {
 
         <div className='row'>
           <div className='col-md-6 col-md-offset-2'>
-            <h1>Welcome to the React Redux Starter Kit</h1>
+            <h1>Welcome to the Redux Weather App</h1>
+            <WeatherList />
           </div>
         </div>
 
