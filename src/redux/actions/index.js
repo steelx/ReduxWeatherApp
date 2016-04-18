@@ -1,4 +1,3 @@
-// import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 const APY_KEY = '2925805fa0bcb3f3df21bb0451f0358f';
 const API_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${APY_KEY}`;
@@ -59,23 +58,6 @@ export function FetchWeather(city){
   console.log('Action ajax ' + new Date(Date.now()));
 
   const axiosGet = axios(url);
-
-  var request = new Request(url, {
-    method: 'GET',
-    mode: 'cors',
-    redirect: 'follow',
-    headers: new Headers({
-      'Content-Type': 'text/plain'
-    })
-  });
-
-  // return (dispatch) => {
-  //   return fetch(request)
-  //     .then(
-  //       success => dispatch(FetchWeatherSuccess(success.clone().json())),
-  //       error => dispatch(FetchWeatherError(error))
-  //     );
-  // };
 
   return (dispatch) => {
     return axiosGet
