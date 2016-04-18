@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {FetchWeather} from '../redux/actions/fetch-weather';
+import {FetchWeather} from '../redux/actions';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -57,3 +57,4 @@ function mapDispatchToProps(dispatch) {
 //Pramote BookList from a component to a container - as it needs to know
 // dispatch and state methods available as props
 export default connect(null, mapDispatchToProps)(SearchBar);
+// export default connect(null, {fetchWeather: FetchWeather})(SearchBar);
