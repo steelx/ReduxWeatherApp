@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {FetchWeather} from '../redux/actions';
+import {FetchWeather} from '../redux/actions/action_fetch_weather';
 
 class SearchBar extends Component {
   constructor(props) {
