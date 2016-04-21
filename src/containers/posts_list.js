@@ -17,13 +17,14 @@ class PostsList extends Component {
   render() {
     return (
       <div className="col-md-12 col-sm-10">
-        {
-          this.props.posts.each(post => {
-            return (
-              <h3>{post.title}</h3>
-            );
-          })
-        }
+        <h3>TrendPaper - What's Trending in the World</h3>
+        <div className="row">
+          <div className="col-xs-12">
+            <h4>
+              <a href="#" className="text-muted">Read More</a>
+            </h4>
+          </div>
+        </div>
       </div>
     );
   }

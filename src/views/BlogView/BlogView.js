@@ -1,6 +1,7 @@
 /* @flow */
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import SearchBar from '../../containers/search_bar';
 import WeatherList from '../../containers/weather_list';
 import classes from './BlogView.scss';
@@ -16,13 +17,16 @@ export class BlogView extends React.Component {
     return (
       <div className='container text-center'>
         <div className='row'>
-          <div className='col-md-6 col-md-offset-2'>
+          <div className='col-md-6'>
             <h3 className={classes.counter}>BlogView</h3>
+          </div>
+          <div className='col-md-2'>
+            <Link to="/posts/add" className={classes.PostsAddBtn + ' btn btn-primary'}>Add New Post</Link>
           </div>
         </div>
 
         <div className='row'>
-          <div className='col-md-6 col-md-offset-2'>
+          <div className='col-md-6'>
             <PostsList />
           </div>
         </div>
