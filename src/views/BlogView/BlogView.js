@@ -5,6 +5,7 @@ import SearchBar from '../../containers/search_bar';
 import WeatherList from '../../containers/weather_list';
 import classes from './BlogView.scss';
 
+import PostsList from '../../containers/posts_list'
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
@@ -22,7 +23,7 @@ export class BlogView extends React.Component {
 
         <div className='row'>
           <div className='col-md-6 col-md-offset-2'>
-            <h1>List </h1>
+            <PostsList />
           </div>
         </div>
 

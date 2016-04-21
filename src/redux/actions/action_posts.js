@@ -12,7 +12,7 @@ export const actionTypes = {
  *
  * @returns {Object}  action object
  */
-export function GetPostsRequest(){
+export function getPostsRequest(){
   return {
     type: actionTypes.GET_POSTS,
     payload: actionTypes.GET_POSTS,
@@ -25,7 +25,7 @@ export function GetPostsRequest(){
  * @param {Object[]}  links
  * @returns {Object}  action object
  */
-export function GetPostsSuccess(payload){
+export function getPostsSuccess(payload){
   return {
     type: actionTypes.GET_POSTS_SUCCESS,
     payload
@@ -39,7 +39,7 @@ export function GetPostsSuccess(payload){
  * @param {Object[]}  error
  * @returns {Object}  action object
  */
-export function GetPostsError(payload){
+export function getPostsError(payload){
   return {
     type: actionTypes.GET_POSTS_ERROR,
     payload
@@ -51,18 +51,18 @@ export function GetPostsError(payload){
  *
  * @returns {object}  action object
  */
-export function GetPosts(city){
+export function getPosts(city){
   // --- will do actuall fetch here ---
-  let url = `${API_URL}&q=${city},in`;
-  console.log('Action ajax ' + new Date(Date.now()));
+  const url = `${ROOT_URL}/posts`;
+  console.log('Posts Action ajax ' + new Date(Date.now()));
 
   const axiosGet = axios(url);
 
   return (dispatch) => {
     return axiosGet
       .then(
-        success => dispatch(GetPostsSuccess(success)),
-        error => dispatch(GetPostsError(error))
+        success => dispatch(getPostsSuccess(success)),
+        error => dispatch(getPostsError(error))
       );
   };
 }
