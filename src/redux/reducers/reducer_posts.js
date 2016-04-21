@@ -1,6 +1,6 @@
 import {actionTypes} from '../actions/action_fetch_posts';
 
-export default function ReducerPosts(state = {}, action) {
+export default function ReducerPosts(state = [], action) {
   // console.log('ReducerWeather ', action.payload, new Date(Date.now()));
 
   switch (action.type) {

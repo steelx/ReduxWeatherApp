@@ -1,6 +1,7 @@
 /**
  * React Component - posts_list.js created on 20/04/16.
  */
+import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchPosts} from '../redux/actions/action_fetch_posts'
@@ -13,18 +14,26 @@ class PostsList extends Component {
     this.props.getPosts();
   }
 
-  render() {
-    console.log(this.props.posts);
+
+  renderPostRow(post) {
     return (
-      <div className="col-md-12 col-sm-10">
-        <h3>TrendPaper - What's Trending in the World</h3>
+      <div className="col-md-12 col-sm-10" key={post.id}>
+        <h3>{post.title}</h3>
         <div className="row">
           <div className="col-xs-12">
             <h4>
-              <a href="#" className="text-muted">Read More</a>
+              <a href={post.id} className="text-muted">Read More</a>
             </h4>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {_.map(this.props.posts, (post) => this.renderPostRow(post))}
       </div>
     );
   }
@@ -48,4 +57,4 @@ function mapDispatchToProps(dispatch) {
   return { getPosts };
 }
 
-export default connect(null, mapDispatchToProps)(PostsList);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsList);
