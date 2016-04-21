@@ -3,8 +3,7 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {getPosts} from '../redux/actions/action_posts'
+import {fetchPosts} from '../redux/actions/action_fetch_posts'
 
 class PostsList extends Component {
 
@@ -15,6 +14,7 @@ class PostsList extends Component {
   }
 
   render() {
+    console.log(this.props.posts);
     return (
       <div className="col-md-12 col-sm-10">
         <h3>TrendPaper - What's Trending in the World</h3>
@@ -41,7 +41,11 @@ function mapStateToProps({posts}) {
 function mapDispatchToProps(dispatch) {
   //Whenever selectBook is called the result will be passed
   //to all reducers
-  return bindActionCreators({getPosts}, dispatch);
+  // return bindActionCreators({getPosts}, dispatch);
+  let getPosts = () => {
+    dispatch(fetchPosts())
+  };
+  return { getPosts };
 }
 
 export default connect(null, mapDispatchToProps)(PostsList);
