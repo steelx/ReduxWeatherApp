@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
+import {createPosts} from '../redux/actions/action_create_posts';
 
 class PostsAdd extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class PostsAdd extends Component {
     const {fields: {title, content, categories}, handleSubmit} = this.props;
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(this.props.addPosts)}>
         <div className="form-group">
           <label>Title</label>
           <input type="text" className="form-control" placeholder="Title" {...title}/>
@@ -32,10 +33,16 @@ class PostsAdd extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  let addPosts = (props) => {
+    dispatch(createPosts(props))
+  };
+  return { addPosts };
+}
 
 PostsAdd = reduxForm({
   form: 'PostsAddForm',
   fields: ['title', 'content', 'categories']
-})(PostsAdd);
+}, null, mapDispatchToProps)(PostsAdd);
 
 export default PostsAdd;
