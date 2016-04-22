@@ -1,0 +1,19 @@
+.counter {
+  font-weight: bold;
+}
+
+.counter--green {
+  composes: counter;
+  color: rgb(25,200,25);
+}
+
+.duck {
+  display: block;
+  width: 100px;
+  margin-top: 1.5rem;
+}
+
+.PostsAddBtn {
+  font-weight: bold;
+  margin: 15px 0;
+}
