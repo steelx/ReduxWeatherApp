@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 import {createPosts} from '../redux/actions/action_create_posts';
+import {Link} from 'react-router';
 
 class PostsAdd extends Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class PostsAdd extends Component {
             {categories.touched ? categories.error : ''}
           </span>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className='btn btn-primary'>Submit</button>
+        <Link to="/posts" className='btn btn-danger'>Cancel</Link>
       </form>
     );
   }

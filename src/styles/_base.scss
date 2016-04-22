@@ -10,3 +10,7 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+
+.has-error {
+  border: 1px solid #dc143c;
+}
