@@ -1,24 +1,35 @@
 /**
  * React Component - created on 21/04/16.
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import {createPosts} from '../redux/actions/action_create_posts';
 import {Link} from 'react-router';
 
 class PostsAdd extends Component {
-  constructor(props) {
-    super(props);
+
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  onSubmit(props) {
+    const p = new Promise((resolve, reject) => {
+      resolve(this.props.addPosts(props));
+    });
+    p.then(() => {
+      this.context.router.push('/posts');
+    });
   }
 
   render() {
     const {fields: {title, content, categories}, handleSubmit} = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.props.addPosts)}>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className="form-group">
           <label>Title</label>
-          <input type="text" className={`form-control ${title.touched && title.invalid ? 'has-error' : '' }`} placeholder="Title" {...title}/>
+          <input type="text" className={`form-control ${title.touched && title.invalid ? 'has-error' : '' }`}
+                 placeholder="Title" {...title}/>
 
           <span className="text-help">
             {title.touched ? title.error : ''}
@@ -34,7 +45,8 @@ class PostsAdd extends Component {
         </div>
         <div className="form-group">
           <label>Email</label>
-          <input type="text" className={`form-control ${categories.touched && categories.invalid ? 'has-error' : '' }`} placeholder="categories" {...categories}/>
+          <input type="text" className={`form-control ${categories.touched && categories.invalid ? 'has-error' : '' }`}
+                 placeholder="categories" {...categories}/>
 
           <span className="text-help">
             {categories.touched ? categories.error : ''}
@@ -50,13 +62,13 @@ class PostsAdd extends Component {
 function validation(values) {
   const errors = {};
 
-  if(!values.title){
+  if (!values.title) {
     errors.title = 'Enter a title';
   }
-  if(!values.content){
+  if (!values.content) {
     errors.content = 'Enter some content';
   }
-  if(!values.categories){
+  if (!values.categories) {
     errors.categories = 'Enter categories';
   }
 
@@ -67,7 +79,7 @@ function mapDispatchToProps(dispatch) {
   let addPosts = (props) => {
     dispatch(createPosts(props))
   };
-  return { addPosts };
+  return {addPosts};
 }
 
 PostsAdd = reduxForm({
