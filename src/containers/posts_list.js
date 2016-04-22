@@ -4,6 +4,7 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import {fetchPosts} from '../redux/actions/action_fetch_posts'
 
 class PostsList extends Component {
@@ -22,7 +23,7 @@ class PostsList extends Component {
         <div className="row">
           <div className="col-xs-12">
             <h4>
-              <a href={post.id} className="text-muted">Read More</a>
+              <Link to={`/posts/${post.id}`} className="text-muted">Read More</Link>
             </h4>
           </div>
         </div>

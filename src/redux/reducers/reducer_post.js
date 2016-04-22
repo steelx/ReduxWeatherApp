@@ -1,16 +1,13 @@
-import {actionTypes} from '../actions/action_fetch_posts';
+import {actionTypes} from '../actions/action_fetch_post';
 
 export default function ReducerPosts(state = {}, action) {
   // console.log('ReducerWeather ', action.payload, new Date(Date.now()));
 
   switch (action.type) {
-    case actionTypes.GET_POSTS:
-      console.log(action.type);
-      return action.payload;
-    case actionTypes.GET_POSTS_SUCCESS:
+    case actionTypes.GET_POST_SUCCESS:
       //don't manipulate state
       return Object.assign({}, state, action.payload.data);
-    case actionTypes.GET_POSTS_ERROR:
+    case actionTypes.GET_POST_ERROR:
       console.log(action.type);
       return action.payload;
   }

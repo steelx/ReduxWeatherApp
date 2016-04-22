@@ -10,11 +10,13 @@ import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import HomeView from 'views/HomeView/HomeView';
 import BlogView from 'views/BlogView/BlogView';
 import PostsAddView from 'views/PostsAddView/PostsAddView';
+import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
 
 export default (store) => (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
     <Route path='posts' component={BlogView} />
     <Route path='posts/add' component={PostsAddView} />
+    <Route path='posts/:id' component={PostsSingleView} />
   </Route>
 )

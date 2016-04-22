@@ -2,8 +2,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import SearchBar from '../../containers/search_bar';
-import WeatherList from '../../containers/weather_list';
 import classes from './BlogView.scss';
 
 import PostsList from '../../containers/posts_list'
