@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
-import { Provider } from 'react-redux'
-import { Router } from 'react-router'
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ export default class Root extends React.Component {
           window.devToolsExtension.open()
         }
       } else if (!window.devToolsExtension) {
-        const DevTools = require('containers/DevTools').default
+        const DevTools = require('containers/DevTools').default;
         return <DevTools />
       }
     }

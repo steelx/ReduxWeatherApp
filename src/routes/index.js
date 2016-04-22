@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 
 // NOTE: here we're making use of the `resolve.root` configuration
 // option in webpack, which allows us to specify import paths as if
@@ -11,12 +11,26 @@ import HomeView from 'views/HomeView/HomeView';
 import BlogView from 'views/BlogView/BlogView';
 import PostsAddView from 'views/PostsAddView/PostsAddView';
 import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
+import LoginView from 'views/LoginView/LoginView';
 
-export default (store) => (
-  <Route path='/' component={CoreLayout}>
-    <IndexRoute component={HomeView} />
-    <Route path='posts' component={BlogView} />
-    <Route path='posts/add' component={PostsAddView} />
-    <Route path='posts/:id' component={PostsSingleView} />
-  </Route>
-)
+export default (store) => {
+  const requireAuth = (nextState, transition, cb) => {
+    // the setTimeout is necessary because of this bug:
+    // https://github.com/rackt/redux-router/pull/62
+    // this will result in a bunch of warnings, but it doesn't seem to be a serious problem
+    if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
+      transition(null, '/login');
+    }
+    cb();
+  };
+
+  return (
+    <Route path='/' component={CoreLayout}>
+      <IndexRoute component={HomeView}/>
+      <Route path='login' component={LoginView} />
+      <Route path='posts' component={BlogView} onEnter={requireAuth} />
+      <Route path='posts/add' component={PostsAddView}/>
+      <Route path='posts/:id' component={PostsSingleView}/>
+    </Route>
+  );
+}
