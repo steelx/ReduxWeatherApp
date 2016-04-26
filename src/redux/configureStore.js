@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import { routerMiddleware } from 'react-router-redux';
+import {configure} from 'redux-auth';
 
 export default function configureStore (initialState = {}, history) {
   // Compose final middleware and use devtools in debug environment
@@ -23,5 +24,11 @@ export default function configureStore (initialState = {}, history) {
       store.replaceReducer(nextRootReducer);
     })
   }
-  return store
+  return store.dispatch(configure([
+    {
+      default: {
+        apiUrl: 'https://github.com/login/oauth/access_token'
+      }
+    }])
+  );
 }
