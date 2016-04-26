@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react';
-import { OAuthSignInButton } from 'redux-auth';
+// bootstrap theme
+import { OAuthSignInButton } from "redux-auth/bootstrap-theme";
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
