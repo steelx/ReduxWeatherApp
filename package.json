@@ -118,7 +118,6 @@
     "react-router-redux": "^4.0.0",
     "react-sparklines": "^1.5.1",
     "redux": "^3.0.0",
-    "redux-auth": "*",
     "redux-form": "^5.1.1",
     "redux-thunk": "^2.0.0",
     "rimraf": "^2.5.1",

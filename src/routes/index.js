@@ -14,21 +14,12 @@ import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
 import LoginView from 'views/LoginView/LoginView';
 
 export default (store) => {
-  const requireAuth = (nextState, transition, cb) => {
-    // the setTimeout is necessary because of this bug:
-    // https://github.com/rackt/redux-router/pull/62
-    // this will result in a bunch of warnings, but it doesn't seem to be a serious problem
-    if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
-      transition(null, '/login');
-    }
-    cb();
-  };
-
+  
   return (
     <Route path='/' component={CoreLayout}>
       <IndexRoute component={HomeView}/>
       <Route path='login' component={LoginView} />
-      <Route path='posts' component={BlogView} onEnter={requireAuth} />
+      <Route path='posts' component={BlogView} />
       <Route path='posts/add' component={PostsAddView}/>
       <Route path='posts/:id' component={PostsSingleView}/>
     </Route>

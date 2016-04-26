@@ -1,7 +1,5 @@
 /* @flow */
 import React from 'react';
-// bootstrap theme
-import { OAuthSignInButton } from "redux-auth/bootstrap-theme";
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
@@ -19,7 +17,7 @@ export class LoginView extends React.Component {
 
         <div className='row'>
           <div className='col-md-6'>
-            <OAuthSignInButton provider='github' />
+            Login
           </div>
         </div>
 
