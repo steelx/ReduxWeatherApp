@@ -15,8 +15,7 @@ export const actionTypes = {
  */
 export function FetchWeatherRequest(){
   return {
-    type: actionTypes.FETCH_WEATHER,
-    payload: actionTypes.FETCH_WEATHER,
+    type: actionTypes.FETCH_WEATHER
   }
 }
 
@@ -58,8 +57,8 @@ export function FetchWeather(city){
   console.log('Action ajax ' + new Date(Date.now()));
 
   const axiosGet = axios(url);
-
   return (dispatch) => {
+    dispatch(FetchWeatherRequest());
     return axiosGet
       .then(
         success => dispatch(FetchWeatherSuccess(success)),

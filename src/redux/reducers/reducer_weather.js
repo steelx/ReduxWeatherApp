@@ -6,7 +6,7 @@ export default function ReducerWeather(state = [], action) {
   switch (action.type) {
     case actionTypes.FETCH_WEATHER:
       console.log(action.type);
-      return action.payload;
+      return state;
     case actionTypes.FETCH_WEATHER_SUCCESS:
       //don't manipulate state
       console.log(action.type);
