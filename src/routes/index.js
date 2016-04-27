@@ -14,11 +14,11 @@ import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
 import LoginView from 'views/LoginView/LoginView';
 
 export default (store) => {
-  
+
   return (
     <Route path='/' component={CoreLayout}>
       <IndexRoute component={HomeView}/>
-      <Route path='login' component={LoginView} />
+      <Route path='signin' component={LoginView} />
       <Route path='posts' component={BlogView} />
       <Route path='posts/add' component={PostsAddView}/>
       <Route path='posts/:id' component={PostsSingleView}/>

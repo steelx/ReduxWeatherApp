@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+import Login from '../../containers/auth/login';
 
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
@@ -17,7 +18,7 @@ export class LoginView extends React.Component {
 
         <div className='row'>
           <div className='col-md-6'>
-            Login
+            <Login />
           </div>
         </div>
 
