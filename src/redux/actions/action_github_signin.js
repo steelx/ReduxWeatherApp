@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 
 const CLIENT_ID = '32b70bf671e04762b26c';
 const CLIENT_SECRET = '5851623d94887db7612d4c9bc689310b9d53284b';
-const ROOT_URL = 'http://localhost:3000';
+const ROOT_URL = window.location.origin;
 const REDIRECT_URL = `${ROOT_URL}/auth/callback`;
 const AUTHORIZE_URL = 'https://github.com/login/oauth/authorize';
 const ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
