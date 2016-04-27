@@ -12,6 +12,7 @@ import BlogView from 'views/BlogView/BlogView';
 import PostsAddView from 'views/PostsAddView/PostsAddView';
 import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
 import LoginView from 'views/LoginView/LoginView';
+import AuthCallbackView from 'views/AuthCallbackView/AuthCallbackView';
 
 export default (store) => {
 
@@ -19,6 +20,7 @@ export default (store) => {
     <Route path='/' component={CoreLayout}>
       <IndexRoute component={HomeView}/>
       <Route path='signin' component={LoginView} />
+      <Route path='auth/callback' component={AuthCallbackView} />
       <Route path='posts' component={BlogView} />
       <Route path='posts/add' component={PostsAddView}/>
       <Route path='posts/:id' component={PostsSingleView}/>
