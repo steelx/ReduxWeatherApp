@@ -19,7 +19,7 @@ export class LoginView extends React.Component {
 
         <div className='row'>
           <div className='col-md-6'>
-            <OAuthSignInButton provider='github' />
+            <OAuthSignInButton provider='github' endpoint='default' />
           </div>
         </div>
 
