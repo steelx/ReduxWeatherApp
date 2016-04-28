@@ -56,7 +56,7 @@ export function githubSendCode(code) {
 
   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   const axiosPost = axios.post(
-    ACCESS_TOKEN_URL,
+    GITHUB_URL,
     {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
