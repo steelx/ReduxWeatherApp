@@ -55,14 +55,7 @@ export function githubSendCode(code) {
   const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
 
   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  const axiosPost = axios.post(
-    GITHUB_URL,
-    {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'text/json'
-    }
-  });
+  const axiosPost = axios.post(GITHUB_URL);
 
   return (dispatch) => {
     dispatch(signinRequest());
