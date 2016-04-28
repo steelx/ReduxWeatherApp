@@ -55,6 +55,7 @@ export function githubSendCode(code){
   const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&redirect_uri=${ROOT_URL}&client_secret=${CLIENT_SECRET}&code=${code}`;
 
   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
   const axiosPost = axios.post(GITHUB_URL);
 
   //headers: {'X-Requested-With': 'XMLHttpRequest'},
