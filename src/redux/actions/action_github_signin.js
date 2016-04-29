@@ -52,14 +52,25 @@ export function githubGeturi() {
 }
 
 export function githubSendCode(code) {
-  const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
+  // const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
 
   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  const axiosPost = axios.post(GITHUB_URL);
+  // const axiosPost = axios.post(GITHUB_URL);
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    params: {
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      code
+    }
+  };
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axiosPost
+    return axios.post(ACCESS_TOKEN_URL, {}, config)
       .then(
         success => dispatch(signinSuccess(success)),
         error => dispatch(signinError(error))
