@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ROOT_URL = 'https://jsonplaceholder.typicode.com';
+const ROOT_URL = 'http://jsonplaceholder.typicode.com';
 
 export const actionTypes = {
   GET_POST: 'GET_POST',
