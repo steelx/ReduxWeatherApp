@@ -17,7 +17,7 @@ class Login extends Component {
   render() {
     console.log(this.props.url);
     return (
-      <buton onClick={() => this.runOnClick()}>Github Login</buton>
+      <a href={this.props.url} target="_parent">Github Login</a>
     );
   }
 }
