@@ -10,10 +10,14 @@ class Login extends Component {
     this.props.getUrl();
   }
 
+  runOnClick() {
+    window.location.href(this.props.url);
+  }
+
   render() {
     console.log(this.props.url);
     return (
-      <a href={this.props.url}>Github Login</a>
+      <buton onClick={() => this.runOnClick()}>Github Login</buton>
     );
   }
 }

@@ -48,7 +48,7 @@ function signinError(payload) {
 }
 
 export function githubGeturi() {
-  const GITHUB_URL = `${AUTHORIZE_URL}?client_id=${CLIENT_ID}&scope=user,public_repo&redirect_uri=${encodeURIComponent(REDIRECT_URL)}&state=${STATE}`;
+  const GITHUB_URL = `${AUTHORIZE_URL}?client_id=${CLIENT_ID}&state=${STATE}`;
 
   return (dispatch) => dispatch(signinUrl(GITHUB_URL));
 }
@@ -73,7 +73,12 @@ export function githubSendCode(code) {
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axios.post(ACCESS_TOKEN_URL, {}, config)
+    return axios.post(ACCESS_TOKEN_URL, {
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        state: STATE,
+        code
+      })
       .then(
         success => dispatch(signinSuccess(success)),
         error => dispatch(signinError(error))
