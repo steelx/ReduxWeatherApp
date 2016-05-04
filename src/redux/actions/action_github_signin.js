@@ -55,8 +55,6 @@ export function githubGeturi() {
 
 export function githubSendCode(code) {
   // const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
-
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   // const axiosPost = axios.post(GITHUB_URL);
 
   const config = {
@@ -73,7 +71,20 @@ export function githubSendCode(code) {
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axios.post(ACCESS_TOKEN_URL, {}, config)
+    return axios({
+      url: ACCESS_TOKEN_URL,
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      responseType: 'json',
+      data: {
+        client_id: CLIENT_ID,
+        state: STATE,
+        code
+      }
+    })
       .then(
         success => dispatch(signinSuccess(success)),
         error => dispatch(signinError(error))
