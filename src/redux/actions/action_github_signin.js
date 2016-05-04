@@ -73,12 +73,7 @@ export function githubSendCode(code) {
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axios.post(ACCESS_TOKEN_URL, {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        state: STATE,
-        code
-      })
+    return axios.post(ACCESS_TOKEN_URL, {}, config)
       .then(
         success => dispatch(signinSuccess(success)),
         error => dispatch(signinError(error))
