@@ -54,37 +54,19 @@ export function githubGeturi() {
 }
 
 export function githubSendCode(code) {
-  // const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
-  // const axiosPost = axios.post(GITHUB_URL);
+  const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}&state=${STATE}`;
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    params: {
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      state: STATE,
-      code
-    }
-  };
+  const axiosPost = axios.post(
+    GITHUB_URL,
+    {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axios({
-      url: ACCESS_TOKEN_URL,
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      responseType: 'json',
-      data: {
-        client_id: CLIENT_ID,
-        state: STATE,
-        code
-      }
-    })
+    return axiosPost
       .then(
         success => dispatch(signinSuccess(success)),
         error => dispatch(signinError(error))
