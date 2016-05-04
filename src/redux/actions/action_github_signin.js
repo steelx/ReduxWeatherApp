@@ -8,7 +8,6 @@ const ROOT_URL = window.location.origin;
 const REDIRECT_URL = `${ROOT_URL}/auth/callback`;
 const AUTHORIZE_URL = 'https://github.com/login/oauth/authorize';
 const ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
-const STATE = _.random(10000);
 
 export const actionTypes = {
   SIGNIN: 'SIGNIN',
@@ -48,13 +47,13 @@ function signinError(payload) {
 }
 
 export function githubGeturi() {
-  const GITHUB_URL = `${AUTHORIZE_URL}?client_id=${CLIENT_ID}&state=${STATE}`;
+  const GITHUB_URL = `${AUTHORIZE_URL}?client_id=${CLIENT_ID}`;
 
   return (dispatch) => dispatch(signinUrl(GITHUB_URL));
 }
 
 export function githubSendCode(code) {
-  const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}&state=${STATE}`;
+  const GITHUB_URL = `${ACCESS_TOKEN_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}`;
 
   const axiosPost = axios.post(
     GITHUB_URL,
