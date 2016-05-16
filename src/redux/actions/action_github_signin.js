@@ -1,6 +1,5 @@
 import axios from 'axios';
-import {browserHistory} from 'react-router';
-import  _ from 'lodash';
+import jsonp from 'jsonp';
 
 const CLIENT_ID = '32b70bf671e04762b26c';
 const CLIENT_SECRET = '5851623d94887db7612d4c9bc689310b9d53284b';
@@ -65,10 +64,17 @@ export function githubSendCode(code) {
 
   return (dispatch) => {
     dispatch(signinRequest());
-    return axiosPost
-      .then(
-        success => dispatch(signinSuccess(success)),
-        error => dispatch(signinError(error))
-      );
+    // return axiosPost
+    //   .then(
+    //     success => dispatch(signinSuccess(success)),
+    //     error => dispatch(signinError(error))
+    //   );
+    return jsonp(GITHUB_URL, null, (error, success) => {
+      if (error) {
+        dispatch(signinError(error));
+      } else {
+        dispatch(signinSuccess(success));
+      }
+    });
   };
 }
