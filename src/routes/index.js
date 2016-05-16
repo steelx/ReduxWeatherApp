@@ -13,6 +13,8 @@ import PostsAddView from 'views/PostsAddView/PostsAddView';
 import PostsSingleView from 'views/PostsSingleView/PostsSingleView';
 import LoginView from 'views/LoginView/LoginView';
 import AuthCallbackView from 'views/AuthCallbackView/AuthCallbackView';
+import requireAuth from '../containers/auth/require_auth';
+
 
 export default (store) => {
 
@@ -21,7 +23,7 @@ export default (store) => {
       <IndexRoute component={HomeView}/>
       <Route path='signin' component={LoginView} />
       <Route path='auth/callback' component={AuthCallbackView} />
-      <Route path='posts' component={BlogView} />
+      <Route path='posts' component={requireAuth(BlogView)} />
       <Route path='posts/add' component={PostsAddView}/>
       <Route path='posts/:id' component={PostsSingleView}/>
     </Route>

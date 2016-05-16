@@ -1,5 +1,7 @@
 import Koa from 'koa'
 import convert from 'koa-convert'
+import bodyParser from 'koa-bodyparser'
+import router from 'koa-route'
 import webpack from 'webpack'
 import webpackConfig from '../build/webpack.config'
 import historyApiFallback from 'koa-connect-history-api-fallback'
@@ -7,17 +9,63 @@ import serve from 'koa-static'
 import proxy from 'koa-proxy'
 import _debug from 'debug'
 import config from '../config'
+import github from 'octonode'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
 
-const debug = _debug('app:server')
-const paths = config.utils_paths
-const app = new Koa()
+const debug = _debug('app:server');
+const paths = config.utils_paths;
+const app = new Koa();
 
 // Enable koa-proxy if it has been enabled in the config.
 if (config.proxy && config.proxy.enabled) {
   app.use(convert(proxy(config.proxy.options)))
 }
+
+//github oauth/access_token middleware
+//eg. POST http://localhost:3000/access_token
+// {
+//   client_id,
+//   code
+// }
+app.use(convert(bodyParser()));
+
+const auth = {
+  access_token: function *() {
+    const code = this.request.body.code;
+    if (!code) return this.throw('invalid code', 404);
+    const getToken = function (callback) {
+      github.auth.config({
+        id: config.github.id,
+        secret: config.github.secret
+      }).login(code, function (err, token) {
+        callback(err, token)
+      })
+    };
+    const token = yield getToken;
+    const client = github.client(token);
+    if (!client) return this.throw('invalid token', 500);
+    const getProfile = function (client) {
+      const profile = function (client, callback) {
+        client.get('/user', {}, function (err, status, body) {
+          console.log(err, status, body);
+          callback(err, body)
+        })
+      };
+      return function (callback) {
+        profile(client, callback)
+      }
+    };
+    const user = yield getProfile(client);
+    if (!user) return this.throw('profile fetch failed', 500);
+    this.body = {
+      user: user,
+      token: token
+    }
+  }
+};
+
+app.use(convert(router.post('/access_token', auth.access_token)));
 
 // This rewrites all routes requests to the root /index.html file
 // (ignoring file requests). If you want to implement isomorphic
@@ -30,13 +78,13 @@ app.use(convert(historyApiFallback({
 // Apply Webpack HMR Middleware
 // ------------------------------------
 if (config.env === 'development') {
-  const compiler = webpack(webpackConfig)
+  const compiler = webpack(webpackConfig);
 
   // Enable webpack-dev and webpack-hot middleware
-  const { publicPath } = webpackConfig.output
+  const { publicPath } = webpackConfig.output;
 
-  app.use(webpackDevMiddleware(compiler, publicPath))
-  app.use(webpackHMRMiddleware(compiler))
+  app.use(webpackDevMiddleware(compiler, publicPath));
+  app.use(webpackHMRMiddleware(compiler));
 
   // Serve static assets from ~/src/static since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside
@@ -49,7 +97,7 @@ if (config.env === 'development') {
     'does not provide any production-ready server functionality. To learn ' +
     'more about deployment strategies, check out the "deployment" section ' +
     'in the README.'
-  )
+  );
 
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
@@ -57,4 +105,4 @@ if (config.env === 'development') {
   app.use(convert(serve(paths.base(config.dir_dist))))
 }
 
-export default app
+export default app;
